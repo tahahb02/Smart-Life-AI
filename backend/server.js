@@ -110,37 +110,40 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('✅ MongoDB connecté à:', process.env.MONGODB_URI);
+// Only start server in development or when not on Vercel
+if (process.env.VERCEL !== '1') {
+  const startServer = async () => {
+    try {
+      await mongoose.connect(process.env.MONGODB_URI);
+      console.log('✅ MongoDB connecté à:', process.env.MONGODB_URI);
 
-    const { verifySMTPConnection } = await import('./utils/sendEmail.js');
-    const { verifyWhatsAppConnection } = await import('./utils/sendWhatsApp.js');
-    await verifySMTPConnection();
-    await verifyWhatsAppConnection();
+      const { verifySMTPConnection } = await import('./utils/sendEmail.js');
+      const { verifyWhatsAppConnection } = await import('./utils/sendWhatsApp.js');
+      await verifySMTPConnection();
+      await verifyWhatsAppConnection();
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log('');
-      console.log('🔧 Mode développement activé');
-      console.log('   Les codes OTP seront affichés dans la console');
-      console.log('');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('');
+        console.log('🔧 Mode développement activé');
+        console.log('   Les codes OTP seront affichés dans la console');
+        console.log('');
+      }
+
+      server.listen(PORT, () => {
+        console.log(`🚀 Serveur SmartLife démarré sur le port ${PORT}`);
+        console.log(`   API: http://localhost:${PORT}/api`);
+        console.log(`   Client: ${process.env.CLIENT_URL}`);
+      });
+    } catch (error) {
+      console.error(`❌ Erreur de démarrage: ${error.message}`);
+      if (error.message.includes('ECONNREFUSED')) {
+        console.error('   MongoDB n\'est pas démarré. Lancez mongod ou utilisez Docker Compose.');
+      }
+      process.exit(1);
     }
+  };
 
-    server.listen(PORT, () => {
-      console.log(`🚀 Serveur SmartLife démarré sur le port ${PORT}`);
-      console.log(`   API: http://localhost:${PORT}/api`);
-      console.log(`   Client: ${process.env.CLIENT_URL}`);
-    });
-  } catch (error) {
-    console.error(`❌ Erreur de démarrage: ${error.message}`);
-    if (error.message.includes('ECONNREFUSED')) {
-      console.error('   MongoDB n\'est pas démarré. Lancez mongod ou utilisez Docker Compose.');
-    }
-    process.exit(1);
-  }
-};
-
-startServer();
+  startServer();
+}
 
 export { app, server, io };
