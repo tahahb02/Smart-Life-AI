@@ -1,5 +1,6 @@
 🚀 Description
-SmartLife AI est une plateforme web moderne et intelligente conçue pour transformer la gestion du quotidien grâce à l'intelligence artificielle. Cette application tout-en-un combine un assistant IA puissant avec des outils de productivité, de gestion financière et de bien-être personnel.
+SmartLife AI est une plateforme web moderne et intelligente conçue pour transformer la gestion du quotidien grâce à l'intelligence artificielle. Cette application tout-en-un combine un assistant IA puissant avec des outils de productivité, de gestion financière et de bien-être personnel. 
+lien pour visualiser:  https://smartlife-ai-eight.vercel.app 
 
 🌟 Pourquoi SmartLife AI ?
 Dans un monde où nous sommes constamment sollicités, SmartLife AI agit comme un compagnon numérique intelligent qui vous aide à :
