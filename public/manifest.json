@@ -1,0 +1,12 @@
+{
+  "name": "SmartLife AI",
+  "short_name": "SmartLife",
+  "description": "Plateforme intelligente pour la vie quotidienne",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#3b82f6",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

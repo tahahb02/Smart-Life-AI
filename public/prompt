@@ -1,0 +1,678 @@
+Tu es un développeur Full Stack Senior, Architecte Logiciel et Expert UI/UX.
+
+Tu dois développer une application web moderne appelée SmartLife AI.
+
+L'objectif est de créer une plateforme intelligente qui aide les utilisateurs dans leur vie quotidienne grâce à l'intelligence artificielle.
+
+L'application doit être professionnelle, sécurisée, responsive, évolutive et prête pour une utilisation en production.
+
+Ne génère jamais du code rapide ou incomplet.
+
+Respecte les bonnes pratiques de React, Node.js, Express, MongoDB et Tailwind CSS.
+
+Le projet doit être entièrement structuré, commenté et maintenable.
+
+Stack Technique
+
+Frontend
+
+React JS
+Vite
+Tailwind CSS
+React Router DOM
+Axios
+React Hook Form
+Zod
+React Query (TanStack Query)
+Socket.io Client
+Recharts
+Framer Motion
+React Hot Toast
+
+Backend
+
+Node.js
+Express.js
+MongoDB
+Mongoose
+JWT
+Bcrypt
+Socket.io
+Multer
+Cloudinary
+Nodemailer
+Twilio WhatsApp API
+Express Validator
+Helmet
+Cors
+Morgan
+Rate Limiter
+dotenv
+
+IA
+
+Permettre facilement le changement entre
+
+OpenAI
+
+Gemini
+
+Mistral
+
+Créer une couche d'abstraction IA afin de pouvoir changer de fournisseur sans modifier le reste du code.
+
+Architecture
+
+Créer une architecture professionnelle.
+
+Frontend
+
+src/
+
+components/
+
+pages/
+
+layouts/
+
+hooks/
+
+context/
+
+services/
+
+api/
+
+store/
+
+utils/
+
+styles/
+
+assets/
+
+Backend
+
+controllers/
+
+routes/
+
+middlewares/
+
+models/
+
+services/
+
+repositories/
+
+validators/
+
+config/
+
+utils/
+
+socket/
+
+uploads/
+
+logs/
+
+Authentification
+
+Créer une authentification complète.
+
+Inscription
+
+Connexion
+
+Déconnexion
+
+JWT
+
+Refresh Token
+
+Forgot Password
+
+Reset Password
+
+Remember Me
+
+Protection des routes
+
+Gestion des rôles
+
+Admin
+
+Utilisateur
+
+Premium
+
+Vérification Email
+
+Lors de l'inscription :
+
+envoyer automatiquement un code OTP à 6 chiffres par email.
+
+Le compte reste inactif tant que le code n'est pas validé.
+
+L'utilisateur peut :
+
+renvoyer un code
+
+voir le temps restant
+
+changer son email
+
+Après validation :
+
+activer automatiquement le compte.
+
+Vérification WhatsApp
+
+Si l'utilisateur choisit le téléphone :
+
+envoyer un code OTP sur WhatsApp.
+
+Utiliser Twilio WhatsApp API.
+
+Validation obligatoire avant activation du compte.
+
+Sécurité
+
+Hashage des mots de passe
+
+Bcrypt
+
+Helmet
+
+Rate Limit
+
+Validation serveur
+
+Protection XSS
+
+Protection NoSQL Injection
+
+Sanitization
+
+JWT sécurisé
+
+Cookies HttpOnly
+
+CSRF Protection
+
+Dashboard
+
+Après connexion :
+
+Dashboard moderne.
+
+Statistiques.
+
+Cartes.
+
+Graphiques.
+
+Notifications.
+
+Résumé quotidien.
+
+Citation motivante générée par IA.
+
+Météo via API.
+
+Calendrier.
+
+Module Budget
+
+Créer un gestionnaire de budget intelligent.
+
+Revenus
+
+Dépenses
+
+Catégories
+
+Graphiques
+
+Objectifs
+
+Prévision financière
+
+Analyse IA
+
+L'IA doit détecter :
+
+les dépenses inutiles
+
+les abonnements oubliés
+
+les économies possibles
+
+les tendances
+
+Module Rendez-vous
+
+Créer un agenda complet.
+
+Calendrier
+
+Notifications
+
+Rappel
+
+Google Calendar Sync
+
+Priorités
+
+Statut
+
+Lieu
+
+Documents associés
+
+Module Médicaments
+
+Créer un gestionnaire de traitement.
+
+Nom
+
+Dosage
+
+Fréquence
+
+Heure
+
+Photo
+
+Ordonnance
+
+Historique
+
+Notification
+
+L'IA explique :
+
+les effets secondaires
+
+les interactions possibles
+
+les précautions
+
+Module Tâches
+
+Créer un Task Manager.
+
+Priorités
+
+Sous-tâches
+
+Tags
+
+Notifications
+
+Deadline
+
+Progression
+
+Kanban
+
+Vue calendrier
+
+L'IA peut :
+
+prioriser les tâches
+
+réorganiser automatiquement la journée
+
+Module Résumé IA
+
+L'utilisateur peut envoyer
+
+PDF
+
+DOCX
+
+TXT
+
+Images
+
+L'IA doit :
+
+résumer
+
+extraire les points importants
+
+créer une checklist
+
+générer des flashcards
+
+créer un quiz
+
+poser des questions
+
+Scanner de Factures
+
+L'utilisateur prend une photo.
+
+OCR
+
+Extraction automatique
+
+Montant
+
+TVA
+
+Date
+
+Entreprise
+
+Catégorie
+
+Ajout automatique dans le budget.
+
+Assistant IA
+
+Créer un chatbot moderne.
+
+Mémoire de conversation.
+
+Réponses streaming.
+
+Historique.
+
+Suggestions.
+
+Mode vocal.
+
+Pièces jointes.
+
+Réponses markdown.
+
+Recommandations IA
+
+Chaque jour :
+
+analyse les habitudes.
+
+Propose :
+
+économies
+
+sport
+
+nutrition
+
+gestion du temps
+
+organisation
+
+bien-être
+
+productivité
+
+Notifications
+
+Temps réel.
+
+Socket.IO
+
+Notifications Push
+
+Emails
+
+WhatsApp
+
+Upload
+
+Cloudinary
+
+Images
+
+PDF
+
+Documents
+
+Avatar
+
+Ordonnances
+
+Factures
+
+Profil
+
+Modifier
+
+Photo
+
+Nom
+
+Téléphone
+
+Adresse
+
+Langue
+
+Fuseau horaire
+
+Préférences IA
+
+Changer mot de passe
+
+Supprimer compte
+
+Télécharger ses données
+
+Paramètres
+
+Dark Mode
+
+Light Mode
+
+Notifications
+
+Langue
+
+Confidentialité
+
+API IA utilisée
+
+Historique IA
+
+Conserver :
+
+Toutes les conversations.
+
+Tous les résumés.
+
+Toutes les recommandations.
+
+Recherche.
+
+Filtres.
+
+Tableau de bord Admin
+
+Gestion utilisateurs
+
+Statistiques
+
+Logs
+
+Erreurs
+
+Utilisation IA
+
+Paiements futurs
+
+Responsive
+
+Desktop
+
+Tablette
+
+Mobile
+
+PWA
+
+UI
+
+Design moderne.
+
+Inspiré de :
+
+Linear
+
+Notion
+
+Stripe
+
+Vercel
+
+Apple
+
+Glassmorphism léger.
+
+Animations Framer Motion.
+
+Base de données
+
+Créer toutes les collections MongoDB.
+
+Users
+
+OTP
+
+Budgets
+
+Transactions
+
+Tasks
+
+Appointments
+
+Medicines
+
+Notifications
+
+Chats
+
+Messages
+
+Recommendations
+
+Documents
+
+Invoices
+
+AIHistory
+
+Settings
+
+Logs
+
+Roles
+
+Permissions
+
+API REST
+
+Créer une API REST complète.
+
+GET
+
+POST
+
+PUT
+
+DELETE
+
+Validation.
+
+Pagination.
+
+Recherche.
+
+Filtres.
+
+Tri.
+
+Documentation
+
+Documenter toutes les routes.
+
+Créer Swagger.
+
+Tests
+
+Tests Backend.
+
+Tests Frontend.
+
+Déploiement
+
+Préparer :
+
+Docker
+
+Docker Compose
+
+Render
+
+Vercel
+
+MongoDB Atlas
+
+Cloudinary
+
+Variables d'environnement
+
+Code Quality
+
+ESLint
+
+Prettier
+
+Architecture propre
+
+Commentaires
+
+TypeScript recommandé
+
+Code réutilisable
+
+IMPORTANT
+
+Ne génère pas toute l'application en une seule fois.
+
+Travaille par étapes.
+
+À chaque étape :
+
+expliquer ce qui sera développé ;
+générer un code complet et fonctionnel ;
+vérifier qu'il compile sans erreur ;
+attendre ma validation avant de passer à l'étape suivante.
+
+Ordre des étapes :
+
+Initialisation du projet (frontend + backend)
+Architecture des dossiers
+Configuration MongoDB
+Authentification JWT
+Vérification Email OTP
+Vérification WhatsApp OTP
+Dashboard
+Gestion des utilisateurs
+Module Budget
+Module Tâches
+Module Rendez-vous
+Module Médicaments
+OCR pour les factures
+Module Résumé IA
+Chat IA
+Recommandations IA
+Notifications temps réel
+Tableau de bord Admin
+Tests
+Déploiement
