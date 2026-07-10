@@ -3,7 +3,7 @@ import { protect, verifiedOnly } from '../middlewares/auth.js';
 import multer from 'multer';
 import { getInvoices, uploadInvoice, processOCR, deleteInvoice } from '../controllers/invoiceController.js';
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ storage: multer.memoryStorage() });
 const router = Router();
 
 router.get('/', protect, verifiedOnly, getInvoices);
