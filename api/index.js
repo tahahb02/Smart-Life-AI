@@ -2,8 +2,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 
 const app = express();
 
@@ -12,10 +10,14 @@ let isConnected = false;
 const connectDB = async () => {
   if (isConnected) return;
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    const uri = process.env.MONGODB_URI;
+    if (!uri) throw new Error('MONGODB_URI is not set');
+    await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000,
+    });
     isConnected = true;
   } catch (error) {
-    console.error('MongoDB error:', error.message);
+    console.error('MongoDB connection error:', error.message);
     throw error;
   }
 };
@@ -25,22 +27,14 @@ app.use(async (req, res, next) => {
     await connectDB();
     next();
   } catch (error) {
-    res.status(500).json({ message: 'Erreur de connexion à la base de données' });
+    res.status(500).json({ message: 'Erreur de connexion à la base de données', detail: error.message });
   }
 });
 
-app.use(helmet());
 app.use(cors({
   origin: process.env.CLIENT_URL || '*',
   credentials: true,
 }));
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: { message: 'Trop de requêtes, réessayez plus tard.' },
-});
-app.use('/api/', limiter);
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -81,7 +75,6 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
   res.status(err.status || 500).json({
     message: err.message || 'Erreur serveur interne',
   });
