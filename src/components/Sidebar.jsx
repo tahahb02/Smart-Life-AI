@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
@@ -26,12 +26,21 @@ const Sidebar = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const { collapsed, toggle } = useSidebar();
-  const [mobileOpen, setMobileOpen] = [false, () => {}];
+  const [mobileOpen, setMobileOpen] = useState(false);
   const isOpen = !collapsed;
 
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   const handleLogout = () => {
     logout();

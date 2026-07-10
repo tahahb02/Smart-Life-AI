@@ -129,7 +129,7 @@ const Tasks = () => {
           tasks.map((task) => (
             <motion.div key={task._id} variants={itemVariants} whileHover={{ y: -1 }}
               className="bg-white dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-800 flex items-center justify-between shadow-sm hover:shadow-md transition-all duration-200">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
                 <button onClick={() => updateMutation.mutate({ id: task._id, data: { status: task.status === 'done' ? 'todo' : 'done' } })}
                   className="flex-shrink-0">
                   {task.status === 'done' ? (
@@ -138,8 +138,8 @@ const Tasks = () => {
                     <Circle size={22} className="text-gray-300 dark:text-gray-600 hover:text-blue-500 dark:hover:text-blue-400 transition-colors" />
                   )}
                 </button>
-                <div>
-                  <p className={`text-sm font-medium ${task.status === 'done' ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-900 dark:text-white'}`}>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-medium truncate ${task.status === 'done' ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-900 dark:text-white'}`}>
                     {task.title}
                   </p>
                   <div className="flex gap-2 mt-1">

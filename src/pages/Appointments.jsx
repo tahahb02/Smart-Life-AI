@@ -126,7 +126,7 @@ const Appointments = () => {
                       <h3 className="text-gray-900 dark:text-white font-medium">{apt.title}</h3>
                       <span className={`px-2 py-0.5 rounded-md text-xs font-medium border ${status.color}`}>{status.label}</span>
                     </div>
-                    <div className="flex gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="flex flex-wrap gap-2 sm:gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
                       <span className="flex items-center gap-1"><Clock size={12} /> {new Date(apt.date).toLocaleDateString('fr-FR', { dateStyle: 'long', timeStyle: 'short' })}</span>
                       {apt.location && <span className="flex items-center gap-1"><MapPin size={12} /> {apt.location}</span>}
                     </div>

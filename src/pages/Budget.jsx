@@ -190,13 +190,13 @@ const Budget = () => {
               return (
                 <motion.div key={t._id} whileHover={{ backgroundColor: 'rgba(0,0,0,0.01)' }}
                   className="p-4 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${config.bg}`}>
-                      <Icon size={18} className={config.color} />
-                    </div>
-                    <div>
-                      <p className="text-gray-900 dark:text-white text-sm font-medium">{t.category}</p>
-                      <p className="text-gray-400 dark:text-gray-500 text-xs">{t.description || new Date(t.date).toLocaleDateString('fr-FR')}</p>
+                   <div className="flex items-center gap-3 flex-1 min-w-0">
+                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${config.bg}`}>
+                       <Icon size={18} className={config.color} />
+                     </div>
+                     <div className="flex-1 min-w-0">
+                       <p className="text-gray-900 dark:text-white text-sm font-medium truncate">{t.category}</p>
+                       <p className="text-gray-400 dark:text-gray-500 text-xs truncate">{t.description || new Date(t.date).toLocaleDateString('fr-FR')}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

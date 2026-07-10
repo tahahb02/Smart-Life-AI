@@ -310,7 +310,7 @@ const Profile = () => {
                 </motion.button>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-3 pt-2">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-2">
               {[
                 { label: 'Amis', value: user?.referralsCount || 0, icon: Users, color: 'text-blue-500' },
                 { label: 'Points', value: (user?.referralsCount || 0) * 500, icon: Award, color: 'text-amber-500' },

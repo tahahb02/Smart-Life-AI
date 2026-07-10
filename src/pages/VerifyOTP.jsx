@@ -80,13 +80,13 @@ const VerifyOTP = () => {
         <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-gray-800">
           <p className="text-sm text-gray-400 dark:text-gray-500 text-center mb-6">Temps restant : {formatTime(timer)}</p>
           <form onSubmit={handleSubmit}>
-            <div className="flex gap-3 justify-center mb-6">
+            <div className="flex gap-2 sm:gap-3 justify-center mb-6">
               {code.map((digit, i) => (
                 <motion.input key={i} id={`otp-${i}`} type="text" maxLength={1} value={digit}
                   onChange={(e) => handleChange(i, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(i, e)}
                   whileFocus={{ scale: 1.05, borderColor: 'rgba(59,130,246,0.5)' }}
-                  className="w-12 h-14 text-center text-xl font-bold bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all" />
+                  className="w-10 sm:w-12 h-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all" />
               ))}
             </div>
             <motion.button type="submit" disabled={loading || timer === 0}

@@ -16,8 +16,7 @@ const MainContent = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       <Sidebar />
-      <main className="transition-all duration-250 ease-in-out lg:ml-[256px]"
-        style={{ marginLeft: collapsed ? '72px' : undefined }}>
+      <main className={`transition-all duration-250 ease-in-out lg:ml-[256px] ${collapsed ? 'lg:!ml-[72px]' : ''}`}>
         <div className="p-4 lg:p-6 pt-16 lg:pt-6 max-w-[1400px] mx-auto">
           <AnimatePresence mode="wait">
             <motion.div key={location.pathname} variants={pageVariants} initial="initial" animate="animate" exit="exit">
