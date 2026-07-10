@@ -1,102 +1,50 @@
-import nodemailer from 'nodemailer';
-
-let transporter = null;
-let transporterType = 'none';
-
-const createTransporter = async () => {
-  if (process.env.SMTP_USER && process.env.SMTP_USER !== 'your_email@gmail.com') {
-    transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT, 10) || 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-    transporterType = 'smtp';
-    return { type: 'smtp' };
-  }
-
-  const testAccount = await nodemailer.createTestAccount();
-  transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
-    },
-  });
-  transporterType = 'ethereal';
-  return {
-    type: 'ethereal',
-    user: testAccount.user,
-    pass: testAccount.pass,
-    webUrl: 'https://ethereal.email/login',
-  };
-};
-
-export const verifySMTPConnection = async () => {
-  try {
-    const info = await createTransporter();
-    await transporter.verify();
-    if (info.type === 'ethereal') {
-      console.log('');
-      console.log('📧 Mode Email de développement (Ethereal)');
-      console.log(`   Web:  ${info.webUrl}`);
-      console.log(`   User: ${info.user}`);
-      console.log(`   Pass: ${info.pass}`);
-      console.log('');
-    } else {
-      console.log('✅ SMTP Brevo connecté');
-    }
-    return true;
-  } catch (error) {
-    console.warn('⚠️  Service email non disponible:', error.message);
-    return false;
-  }
-};
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
+const SENDER_EMAIL = process.env.SMTP_USER || 'noreply@smartlife-ai.com';
+const SENDER_NAME = 'SmartLife AI';
 
 export const sendEmail = async ({ to, subject, html }) => {
-  if (!transporter) {
-    try {
-      await createTransporter();
-    } catch (err) {
-      console.error('Erreur init transporter:', err.message);
-      return;
-    }
-  }
-
-  if (!transporter) {
-    console.log(`📧 [DEV] Email non envoyé (transport non initialisé)`);
-    console.log(`   À: ${to}`);
-    console.log(`   Sujet: ${subject}`);
+  if (!BREVO_API_KEY) {
+    console.error('BREVO_API_KEY non configurée');
     return;
   }
 
-  const from = transporterType === 'ethereal'
-    ? '"SmartLife AI" <noreply@smartlife.ai>'
-    : '"SmartLife AI" <noreply@smartlife-ai.com>';
+  try {
+    const response = await fetch(BREVO_API_URL, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': BREVO_API_KEY,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: SENDER_NAME, email: SENDER_EMAIL },
+        to: [{ email: to }],
+        subject,
+        htmlContent: html,
+      }),
+    });
 
-  const msg = await transporter.sendMail({
-    from,
-    to,
-    subject,
-    html,
-    headers: {
-      'X-Mailer': 'SmartLife-AI',
-      'List-Unsubscribe': `<mailto:unsubscribe@smartlife-ai.com?subject=unsubscribe>`,
-    },
-  });
+    const data = await response.json();
 
-  if (transporterType === 'ethereal') {
-    const previewUrl = nodemailer.getTestMessageUrl(msg);
-    if (previewUrl) {
-      console.log(`📧 Email visible ici: ${previewUrl}`);
+    if (!response.ok) {
+      console.error('Brevo API error:', response.status, data.message || JSON.stringify(data));
+      return;
     }
+
+    console.log('Email envoyé à:', to, '- messageId:', data.messageId);
+  } catch (error) {
+    console.error('Erreur envoi email:', error.message);
   }
+};
+
+export const verifySMTPConnection = async () => {
+  if (!BREVO_API_KEY) {
+    console.warn('⚠️  BREVO_API_KEY non configurée');
+    return false;
+  }
+  console.log('✅ Brevo API prête');
+  return true;
 };
 
 export const sendOTPEmail = async (email, code) => {
