@@ -60,6 +60,15 @@ export const verifySMTPConnection = async () => {
 
 export const sendEmail = async ({ to, subject, html }) => {
   if (!transporter) {
+    try {
+      await createTransporter();
+    } catch (err) {
+      console.error('Erreur init transporter:', err.message);
+      return;
+    }
+  }
+
+  if (!transporter) {
     console.log(`📧 [DEV] Email non envoyé (transport non initialisé)`);
     console.log(`   À: ${to}`);
     console.log(`   Sujet: ${subject}`);
